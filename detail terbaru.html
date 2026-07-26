@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UAS KATI 2026 - Detail Produk</title>
+    <style>
+        /* --- RESET & GLOBAL STYLES --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #f4f6f9;
+            color: #333333;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* --- HEADER BANNER --- */
+        header {
+            background-color: #1a365d;
+            text-align: center;
+            padding: 25px 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .banner-img {
+            max-width: 100%;
+            height: auto;
+            max-height: 250px;
+            border-radius: 8px;
+            border: 2px solid #2b6cb0;
+            object-fit: cover;
+        }
+
+        .brand-title {
+            color: #ffffff;
+            font-size: 1.8rem;
+            margin-top: 15px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        /* --- NAVIGATION BAR --- */
+        nav {
+            background-color: #2b6cb0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-link {
+            color: #ffffff;
+            font-weight: bold;
+            padding: 14px 24px;
+            transition: background 0.3s, color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background-color: #1a365d;
+        }
+
+        /* --- MAIN CONTAINER --- */
+        main {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .page-title {
+            text-align: center;
+            color: #1a365d;
+            font-size: 1.75rem;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .page-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: #e53e3e;
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* --- PRODUCT CARD STYLES --- */
+        .product-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            border: 1px solid #cbd5e1;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 35px;
+            display: flex;
+            flex-wrap: wrap;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+            scroll-margin-top: 70px; /* Offset untuk navigasi sticky */
+        }
+
+        .product-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-image-col {
+            flex: 1 1 350px;
+            background-color: #f8fafc;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-right: 1px solid #e2e8f0;
+        }
+
+        .product-image-col img {
+            width: 100%;
+            max-width: 380px;
+            height: auto;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            object-fit: cover;
+        }
+
+        .image-caption {
+            font-size: 0.85rem;
+            color: #64748b;
+            font-style: italic;
+            margin-top: 12px;
+            text-align: center;
+        }
+
+        .product-details-col {
+            flex: 2 1 450px;
+            padding: 30px;
+        }
+
+        .product-name {
+            font-size: 1.5rem;
+            color: #1a365d;
+            margin-bottom: 5px;
+        }
+
+        .product-price {
+            font-size: 1.35rem;
+            color: #e53e3e;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        hr {
+            border: none;
+            height: 2px;
+            background-color: #e2e8f0;
+            margin: 15px 0;
+        }
+
+        .description-title, .spec-title {
+            font-weight: bold;
+            color: #1a365d;
+            margin-top: 10px;
+            display: block;
+        }
+
+        .description-text {
+            text-align: justify;
+            margin-bottom: 15px;
+            color: #475569;
+            font-size: 0.95rem;
+        }
+
+        .spec-list {
+            margin-left: 20px;
+            margin-bottom: 15px;
+            color: #475569;
+            font-size: 0.95rem;
+        }
+
+        .spec-list li {
+            margin-bottom: 5px;
+        }
+
+        /* --- FORM STYLES --- */
+        .order-form {
+            margin-top: 15px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            gap: 12px 15px;
+            align-items: center;
+        }
+
+        .form-label {
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: #334155;
+        }
+
+        select, input[type="number"] {
+            width: 100%;
+            max-width: 250px;
+            padding: 8px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        select:focus, input[type="number"]:focus {
+            border-color: #2b6cb0;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .radio-group label {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .submit-btn-container {
+            grid-column: 1 / -1;
+            margin-top: 10px;
+        }
+
+        .submit-btn {
+            background-color: #1a365d;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        .submit-btn:hover {
+            background-color: #2b6cb0;
+        }
+
+        .submit-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #1a365d;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px 15px;
+            margin-top: 50px;
+            font-size: 0.85rem;
+        }
+
+        /* --- RESPONSIVE ADJUSTMENTS --- */
+        @media (max-width: 768px) {
+            .product-image-col {
+                border-right: none;
+                border-bottom: 1px solid #e2e8f0;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .nav-link {
+                padding: 10px 14px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER BANNER -->
+    <header>
+        <img src="https://github.com/rayenibrahimovic27-bit/kati-/blob/main/showroom.jpg?raw=true" alt="Banner Showroom Mobil BROT" class="banner-img">
+        <h1 class="brand-title">SHOWROOM MOBIL BROT</h1>
+    </header>
+
+    <!-- NAVIGATION BAR -->
+    <nav>
+        <div class="nav-container">
+            <a href="index terbaru.html" class="nav-link">Katalog Produk</a>
+            <a href="detail terbaru.html" class="nav-link active">Detail Unggulan</a>
+            <a href="transaksi terbaru.html" class="nav-link">Pemesanan</a>
+            <a href="invoice terbaru.html" class="nav-link active">Invoice</a>
+			<a href="tentang terbaru.html" class="nav-link">Tentang Kami</a>
+            <a href="kontak terbaru.html" class="nav-link">Kontak Kami</a>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <h2 class="page-title">DETAIL UNGGULAN - 9 UNIT PILIHAN</h2>
+
+        <!-- 1. TOYOTA AVANZA -->
+        <article id="av" class="product-card">
+            <div class="product-image-col">
+                <img src="https://github.com/rayenibrahimovic27-bit/kati-/blob/main/avanza.webp?raw=true" alt="Toyota Avanza">
+                <p class="image-caption">*Mobil Keluarga Paling Populer</p>
+            </div>
+            <div class="product-details-col">
+                <h3 class="product-name">1. Toyota Avanza</h3>
+                <div class="product-price">Rp 235.000.000</div>
+                <hr>
+                <span class="description-title">Deskripsi Produk:</span>
+                <p class="description-text">Nikmati perjalanan keluarga yang nyaman dan aman bersama Toyota Avanza. Kendaraan MPV legendaris yang dirancang khusus dengan kabin luas, fleksibilitas tinggi, serta efisiensi bahan bakar maksimal untuk menunjang aktivitas harian Anda.</p>
+                
+                <span class="spec-title">Spesifikasi Utama:</span>
+                <ul class="spec-list">
+                    <li><b>Tipe Mesin:</b> 1.5L 4-Cylinder DOHC Dual VVT-i</li>
+                    <li><b>Transmisi:</b> CVT / Manual 5-Percepatan</li>
+                    <li><b>Fitur Keamanan:</b> Vehicle Stability Control (VSC) & Hill Start Assist</li>
+                </ul>
+                <hr>
+                
+                <form action="transaksi.html" method="get" class="order-form">
+                    <div class="form-grid">
+                        <label class="form-label">Pilihan Warna:</label>
+                        <div>
+                            <select name="warna_avanza">
+                                <option value="Putih">White Alloy</option>
+                                <option value="Hitam">Black Metallic</option>
+                                <option value="Perak">Silver Mica Metallic</option>
+                            </select>
+                        </div>
+
+                        <label class="form-label">Jenis Transmisi:</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="transmisi_avanza" value="Otomatis" checked> Otomatis (CVT)</label>
+                            <label><input type="radio" name="transmisi_avanza" value="Manual"> Manual</label>
+                        </div>
+
+                        <label class="form-label">Jumlah Unit:</label>
+                        <div>
+                            <input type="number" name="jumlah_avanza" value="1" min="1">
+                        </div>
+
+                        <div class="submit-btn-container">
+                            <button type="submit" class="submit-btn">Lanjut Ke Pemesanan / Reservasi</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </article>
+
+        <!-- 2. PAJERO SPORT -->
+        <article id="pjr" class="product-card">
+            <div class="product-image-col">
+                <img src="https://github.com/rayenibrahimovic27-bit/kati-/blob/main/pajero.webp?raw=true" alt="Pajero Sport">
+                <p class="image-caption">*SUV Gagah dan Tangguh</p>
+            </div>
+            <div class="product-details-col">
+                <h3 class="product-name">2. Pajero Sport</h3>
+                <div class="product-price">Rp 575.000.000</div>
+                <hr>
+                <span class="description-title">Deskripsi Produk:</span>
+                <p class="description-text">Taklukkan setiap tantangan dengan Pajero Sport. SUV premium yang memadukan kekuatan mesin diesel intercooler tangguh dengan desain eksterior Dynamic Shield yang berkarakter kuat dan mewah.</p>
+                
+                <span class="spec-title">Spesifikasi Utama:</span>
+                <ul class="spec-list">
+                    <li><b>Tipe Mesin:</b> 2.4L MIVEC DI-D Common Rail Turbocharged</li>
+                    <li><b>Transmisi:</b> 8-Speed Automatic / 5-Speed Manual</li>
+                    <li><b>Fitur Keamanan:</b> Forward Collision Mitigation System (FCM)</li>
+                </ul>
+                <hr>
+                
+                <form action="transaksi.html" method="get" class="order-form">
+                    <div class="form-grid">
+                        <label class="form-label">Pilihan Warna:</label>
+                        <div>
+                            <select name="warna_pajero">
+                                <option value="Hitam">Jet Black Mica</option>
+                                <option value="Putih">Quartz White Pearl</option>
+                                <option value="Abu-abu">Graphite Gray Metallic</option>
+                            </select>
+                        </div>
+
+                        <label class="form-label">Jenis Transmisi:</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="transmisi_pajero" value="Otomatis" checked> Otomatis</label>
+                            <label><input type="radio" name="transmisi_pajero" value="Manual"> Manual</label>
+                        </div>
+
+                        <label class="form-label">Jumlah Unit:</label>
+                        <div>
+                            <input type="number" name="jumlah_pajero" value="1" min="1">
+                        </div>
+
+                        <div class="submit-btn-container">
+                            <button type="submit" class="submit-btn">Lanjut Ke Pemesanan / Reservasi</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </article>
+
+        <!-- 3. HONDA CIVIC RS -->
+        <article id="cvc" class="product-card">
+            <div class="product-image-col">
+                <img src="https://github.com/rayenibrahimovic27-bit/kati-/blob/main/cuvuv.webp?raw=true" alt="Honda Civic RS">
+                <p class="image-caption">*Gambar Unit Terbanyak Dicari</p>
+            </div>
+            <div class="product-details-col">
+                <h3 class="product-name">3. Honda Civic RS</h3>
+                <div class="product-price">Rp 610.000.000</div>
+                <hr>
+                <span class="description-title">Deskripsi Produk:</span>
+                <p class="description-text">Rasakan pengalaman berkendara sporty dan mewah dengan Honda Civic RS. Didesain khusus untuk Anda yang berjiwa dinamis dan profesional. Dilengkapi dengan mesin VTEC Turbo yang bertenaga namun tetap efisien bahan bakar.</p>
+                
+                <span class="spec-title">Spesifikasi Utama:</span>
+                <ul class="spec-list">
+                    <li><b>Tipe Mesin:</b> 1.5L VTEC Turbo DOHC 178 PS</li>
+                    <li><b>Transmisi:</b> CVT dengan Earth Dreams Technology</li>
+                    <li><b>Fitur Keamanan:</b> Honda SENSING Lengkap</li>
+                </ul>
+                <hr>
+                
+                <form action="transaksi.html" method="get" class="order-form">
+                    <div class="form-grid">
+                        <label class="form-label">Pilihan Warna:</label>
+                        <div>
+                            <select name="warna_civic">
+                                <option value="Merah">Ignite Red Metallic</option>
+                                <option value="Hitam">Crystal Black Pearl</option>
+                                <option value="Putih">Platinum White Pearl</option>
+                            </select>
+                        </div>
+
+                        <label class="form-label">Jenis Transmisi:</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="transmisi_civic" value="CVT" checked> Otomatis (CVT)</label>
+                            <label><input type="radio" name="transmisi_civic" value="Manual"> Manual</label>
+                        </div>
+
+                        <label class="form-label">Jumlah Unit:</label>
+                        <div>
+                            <input type="number" name="jumlah_civic" value="1" min="1">
+                        </div>
+
+                        <div class="submit-btn-container">
+                            <button type="submit" class="submit-btn">Lanjut Ke Pemesanan / Reservasi</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </article>
+
+        <!-- 4. HYUNDAI IONIQ 5 -->
+        <article id="iq" class="product-card">
+            <div class="product-image-col">
+                <img src="https://github.com/rayenibrahimovic27-bit/kati-/blob/main/ioniq.webp?raw=true" alt="Hyundai Ioniq 5">
+                <p class="image-caption">*Era Baru Mobil Listrik Futuristik</p>
+            </div>
+            <div class="product-details-col">
+                <h3 class="product-name">4. Hyundai Ioniq 5</h3>
+                <div class="product-price">Rp 780.000.000</div>
+                <hr>
+                <span class="description-title">Deskripsi Produk:</span>
+                <p class="description-text">Masuki era mobilitas masa depan bersama Hyundai Ioniq 5. Crossover listrik murni pertama yang dibangun di atas E-GMP platform, menyuguhkan pengisian daya super cepat dan material ramah lingkungan di dalam kabin.</p>
+                
+                <span class="spec-title">Spesifikasi Utama:</span>
+                <ul class="spec-list">
+                    <li><b>Tipe Motor:</b> Permanent Magnet Synchronous Motor (Baterai Lithium-ion)</li>
+                    <li><b>Transmisi:</b> Single Speed Reduction Gear (Otomatis EV)</li>
+                    <li><b>Fitur Keamanan:</b> Hyundai SmartSense (FCA, LKA, BCA, dll)</li>
+                </ul>
+                <hr>
+                
+                <form action="transaksi.html" method="get" class="order-form">
+                    <div class="form-grid">
+                        <label class="form-label">Pilihan Warna:</label>
+                        <div>
+                            <select name="warna_ioniq">
+                                <option value="Perak">Gravity Gold Matte</option>
+                                <option value="Putih">Atlas White</option>
+                                <option value="Hitam">Midnight Black Pearl</option>
+                            </select>
+                        </div>
+
+                        <label class="form-label">Jenis Transmisi:</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="transmisi_ioniq" value="Otomatis" checked> Otomatis (EV)</label>
+                        </div>
+
+                        <label class="form-label">Jumlah Unit:</label>
+                        <div>
+                            <input type="number" name="jumlah_ioniq" value="1" min="1">
+                        </div>
+
+                        <div class="submit-btn-container">
+                            <button type="submit" class="submit-btn">Lanjut Ke Pemesanan / Reservasi</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </article>
+
+        <!-- 5. SUZUKI ERTIGA -->
+        <article id="eg" class="product-card">
+            <div class="product-image-col">
+                <img src="https://github.com/rayenibrahimovic27-bit/kati-/blob/main/ertiga.webp?raw=true" alt="Suzuki Ertiga">
+                <p class="image-caption">*Kenyamanan MPV Pintar & Efisien</p>
+            </div>
+            <div class="product-details-col">
+                <h3 class="product-name">5. Suzuki Ertiga</h3>
+                <div class="product-price">Rp 240.000.000</div>
+                <hr>
+                <span class="description-title">Deskripsi Produk:</span>
+                <p class="description-text">Suzuki Ertiga hadir sebagai solusi MPV keluarga pintar yang nyaman, aman, dan sangat irit. Dilengkapi kabin bernuansa elegan serta sasis HEARTECT yang kokoh demi kestabilan maksimal di perjalanan.</p>
+                
+                <span class="spec-title">Spesifikasi Utama:</span>
+                <ul class="spec-list">
+                    <li><b>Tipe Mesin:</b> K15B DOHC VVT 1.462 cc</li>
+                    <li><b>Transmisi:</b> Otomatis 4-Percepatan / Manual 5-Percepatan</li>
+                    <li><b>Fitur Keamanan:</b> Dual SRS Airbags & Electronic Stability Programme (ESP)</li>
+                </ul>
+                <hr>
+                
+                <form action="transaksi.html" method="get" class="order-form">
+                    <div class="form-grid">
+                        <label class="form-label">Pilihan Warna:</label>
+                        <div>
+                            <select name="warna_ertiga">
+                                <option value="Abu-abu">Metallic Magma Gray</option>
+                                <option value="Putih">Pearl Snow White</option>
+                                <option value="Perak">Cool Black Metallic</option>
+                            </select>
+                        </div>
+
+                        <label class="form-label">Jenis Transmisi:</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="transmisi_ertiga" value="Otomatis" checked> Otomatis</label>
+                            <label><input type="radio" name="transmisi_ertiga" value="Manual"> Manual</label>
+                        </div>
+
+                        <label class="form-label">Jumlah Unit:</label>
+                        <div>
+                            <input type="number" name="jumlah_ertiga" value="1" min="1">
+                        </div>
+
+                        <div class="submit-btn-container">
+                            <button type="submit" class="submit-btn">Lanjut Ke Pemesanan / Reservasi</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </article>
+
+        <!-- 6. WULING AIR EV -->
+        <article id="wae" class="product-card">
+            <div class="product-image-col">
+                <img src="https://github.com/rayenibrahimovic27-bit/kati-/blob/main/air%20ev.webp?raw=true" alt="Wuling Air EV">
+                <p class="image-caption">*City Car Listrik Lincah & Praktis</p>
+            </div>
+            <div class="product-details-col">
+                <h3 class="product-name">6. Wuling Air EV</h3>
+                <div class="product-price">Rp 220.000.000</div>
+                <hr>
+                <span class="description-title">Deskripsi Produk:</span>
+                <p class="description-text">Wuling Air EV menawarkan kemudahan mobilitas perkotaan yang modern dan ramah lingkungan. Desain bodi compact yang lincah disandingkan dengan kemudahan pengisian daya di rumah (Easy Home Charging).</p>
+                
+                <span class="spec-title">Spesifikasi Utama:</span>
+                <ul class="spec-list">
+                    <li><b>Kapasitas Baterai:</b> 17.3 kWh hingga 26.7 kWh Lithium Ferro-Phosphate</li>
+                    <li><b>Transmisi:</b> Single Speed Automatic (Electric Motor)</li>
+                    <li><b>Fitur Keamanan:</b> ABS, EBD, Tire Pressure Monitoring System (TPMS)</li>
+                </ul>
+                <hr>
+                
+                <form action="transaksi.html" method="get" class="order-form">
+                    <div class="form-grid">
+                        <label class="form-label">Pilihan Warna:</label>
+                        <div>
+                            <select name="warna_airev">
+                                <option value="Hijau">Avocado Green</option>
+                                <option value="Biru">Galaxy Blue</option>
+                                <option value="Putih">Pristine White</option>
+                            </select>
+                        </div>
+
+                        <label class="form-label">Jenis Transmisi:</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="transmisi_airev" value="Otomatis" checked> Otomatis (EV)</label>
+                        </div>
+
+                        <label class="form-label">Jumlah Unit:</label>
+                        <div>
+                            <input type="number" name="jumlah_airev" value="1" min="1">
+                        </div>
+
+                        <div class="submit-btn-container">
+                            <button type="submit" class="submit-btn">Lanjut Ke Pemesanan / Reservasi</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </article>
+
+        <!-- 7. DAIHATSU ROCKY -->
+        <article id="rcy" class="product-card">
+            <div class="product-image-col">
+                <img src="https://github.com/rayenibrahimovic27-bit/kati-/blob/main/rocky.webp?raw=true" alt="Daihatsu Rocky">
+                <p class="image-caption">*Compact SUV Berjiwa Muda</p>
+            </div>
+            <div class="product-details-col">
+                <h3 class="product-name">7. Daihatsu Rocky</h3>
+                <div class="product-price">Rp 205.000.000</div>
+                <hr>
+                <span class="description-title">Deskripsi Produk:</span>
+                <p class="description-text">Daihatsu Rocky membawa nafas baru bagi pengendara urban berjiwa muda. Compact SUV yang gesit menembus kemacetan berkat performa opsi mesin turbo modern dan platform konstruksi DNGA terkini.</p>
+                
+                <span class="spec-title">Spesifikasi Utama:</span>
+                <ul class="spec-list">
+                    <li><b>Tipe Mesin:</b> 1.0L 3-Cylinder Turbocharged / 1.2L NA</li>
+                    <li><b>Transmisi:</b> D-CVT (Otomatis) / Manual 5-Percepatan</li>
+                    <li><b>Fitur Keamanan:</b> Daihatsu ASA (Advanced Safety Assist)</li>
+                </ul>
+                <hr>
+                
+                <form action="transaksi.html" method="get" class="order-form">
+                    <div class="form-grid">
+                        <label class="form-label">Pilihan Warna:</label>
+                        <div>
+                            <select name="warna_rocky">
+                                <option value="Merah">Compagno Red</option>
+                                <option value="Kuning">Mustard Yellow Metallic</option>
+                                <option value="Putih">Icy White</option>
+                            </select>
+                        </div>
+
+                        <label class="form-label">Jenis Transmisi:</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="transmisi_rocky" value="Otomatis" checked> Otomatis (D-CVT)</label>
+                            <label><input type="radio" name="transmisi_rocky" value="Manual"> Manual</label>
+                        </div>
+
+                        <label class="form-label">Jumlah Unit:</label>
+                        <div>
+                            <input type="number" name="jumlah_rocky" value="1" min="1">
+                        </div>
+
+                        <div class="submit-btn-container">
+                            <button type="submit" class="submit-btn">Lanjut Ke Pemesanan / Reservasi</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </article>
+
+        <!-- 8. MAZDA CX-5 -->
+        <article id="cx" class="product-card">
+            <div class="product-image-col">
+                <img src="https://github.com/rayenibrahimovic27-bit/kati-/blob/main/mazda.webp?raw=true" alt="Mazda CX-5">
+                <p class="image-caption">*Crossover Premium Kelas Atas</p>
+            </div>
+            <div class="product-details-col">
+                <h3 class="product-name">8. Mazda CX-5</h3>
+                <div class="product-price">Rp 599.000.000</div>
+                <hr>
+                <span class="description-title">Deskripsi Produk:</span>
+                <p class="description-text">Rasakan keharmonisan berkendara yang intim (Jinba-Ittai) bersama Mazda CX-5. Balutan eksterior menawan berfilosofi Kodo Design dipadukan interior mewah kelas atas demi kenyamanan perjalanan eksklusif Anda.</p>
+                
+                <span class="spec-title">Spesifikasi Utama:</span>
+                <ul class="spec-list">
+                    <li><b>Tipe Mesin:</b> Skyactiv-G 2.5L In-line 4-Cylinder DOHC</li>
+                    <li><b>Transmisi:</b> 6-Speed Skyactiv-Drive Automatic</li>
+                    <li><b>Fitur Keamanan:</b> i-Activsense (MRCC, SBS, LDWS, dll)</li>
+                </ul>
+                <hr>
+                
+                <form action="transaksi.html" method="get" class="order-form">
+                    <div class="form-grid">
+                        <label class="form-label">Pilihan Warna:</label>
+                        <div>
+                            <select name="warna_mazda">
+                                <option value="Merah">Soul Red Crystal Metallic</option>
+                                <option value="Abu-abu">Machine Grey Metallic</option>
+                                <option value="Putih">Snowflake White Pearl</option>
+                            </select>
+                        </div>
+
+                        <label class="form-label">Jenis Transmisi:</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="transmisi_mazda" value="Otomatis" checked> Otomatis</label>
+                        </div>
+
+                        <label class="form-label">Jumlah Unit:</label>
+                        <div>
+                            <input type="number" name="jumlah_mazda" value="1" min="1">
+                        </div>
+
+                        <div class="submit-btn-container">
+                            <button type="submit" class="submit-btn">Lanjut Ke Pemesanan / Reservasi</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </article>
+
+        <!-- 9. TOYOTA FORTUNER -->
+        <article id="ftr" class="product-card">
+            <div class="product-image-col">
+                <img src="https://github.com/rayenibrahimovic27-bit/kati-/blob/main/fortuner.webp?raw=true" alt="Toyota Fortuner">
+                <p class="image-caption">*SUV Gagah Raja Jalanan</p>
+            </div>
+            <div class="product-details-col">
+                <h3 class="product-name">9. Toyota Fortuner</h3>
+                <div class="product-price">Rp 560.000.000</div>
+                <hr>
+                <span class="description-title">Deskripsi Produk:</span>
+                <p class="description-text">Tunjukkan dominasi Anda di jalan raya bersama Toyota Fortuner. SUV berkarakter gagah dengan ground clearance tinggi yang dibekali ketangguhan mesin handal untuk melibas medan aspal maupun off-road ringan.</p>
+                
+                <span class="spec-title">Spesifikasi Utama:</span>
+                <ul class="spec-list">
+                    <li><b>Tipe Mesin:</b> 2.8L 1GD-FTV 4-Cylinder Diesel Turbo VNT</li>
+                    <li><b>Transmisi:</b> 6-Speed Automatic dengan Sequential Switch</li>
+                    <li><b>Fitur Keamanan:</b> 7 SRS Airbags, VSC, Hill Assist Control</li>
+                </ul>
+                <hr>
+                
+                <form action="transaksi.html" method="get" class="order-form">
+                    <div class="form-grid">
+                        <label class="form-label">Pilihan Warna:</label>
+                        <div>
+                            <select name="warna_fortuner">
+                                <option value="Hitam">Attitude Black Mica</option>
+                                <option value="Putih">Super White</option>
+                                <option value="Abu-abu">Dark Gray Mica Metallic</option>
+                            </select>
+                        </div>
+
+                        <label class="form-label">Jenis Transmisi:</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="transmisi_fortuner" value="Otomatis" checked> Otomatis</label>
+                            <label><input type="radio" name="transmisi_fortuner" value="Manual"> Manual</label>
+                        </div>
+
+                        <label class="form-label">Jumlah Unit:</label>
+                        <div>
+                            <input type="number" name="jumlah_fortuner" value="1" min="1">
+                        </div>
+
+                        <div class="submit-btn-container">
+                            <button type="submit" class="submit-btn">Lanjut Ke Pemesanan / Reservasi</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </article>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2025 Showroom Mobil BROT. Tugas UTS Aplikasi Teknologi Informasi.</p>
+    </footer>
+
+</body>
+</html>

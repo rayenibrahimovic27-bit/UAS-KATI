@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UAS KATI 2026 - Kontak Kami</title>
+    <style>
+        /* --- RESET & GLOBAL STYLES --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #f4f6f9;
+            color: #333333;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* --- HEADER BANNER --- */
+        header {
+            background-color: #1a365d;
+            text-align: center;
+            padding: 25px 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .banner-img {
+            max-width: 100%;
+            height: auto;
+            max-height: 250px;
+            border-radius: 8px;
+            border: 2px solid #2b6cb0;
+            object-fit: cover;
+        }
+
+        .brand-title {
+            color: #ffffff;
+            font-size: 1.8rem;
+            margin-top: 15px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        /* --- NAVIGATION BAR --- */
+        nav {
+            background-color: #2b6cb0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-link {
+            color: #ffffff;
+            font-weight: bold;
+            padding: 14px 24px;
+            transition: background 0.3s, color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background-color: #1a365d;
+        }
+
+        /* --- MAIN CONTAINER --- */
+        main {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* --- PROFILE CARD --- */
+        .profile-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            border: 1px solid #cbd5e1;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            padding: 40px 35px;
+        }
+
+        .card-title {
+            text-align: center;
+            color: #1a365d;
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+        }
+
+        .title-divider {
+            border: none;
+            height: 3px;
+            background-color: #2b6cb0;
+            margin: 10px auto 30px auto;
+            width: 100px;
+            border-radius: 2px;
+        }
+
+        /* --- PROFILE CONTENT GRID --- */
+        .profile-container {
+            display: flex;
+            align-items: center;
+            gap: 35px;
+        }
+
+        .photo-wrapper {
+            flex: 0 0 160px;
+            text-align: center;
+        }
+
+        .student-photo {
+            width: 150px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid #2b6cb0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .details-wrapper {
+            flex: 1;
+        }
+
+        /* --- BIODATA TABLE --- */
+        .biodata-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .biodata-table tr {
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .biodata-table tr:last-child {
+            border-bottom: none;
+        }
+
+        .biodata-table td {
+            padding: 10px 6px;
+            font-size: 0.95rem;
+            vertical-align: top;
+        }
+
+        .label-col {
+            font-weight: bold;
+            color: #1a365d;
+            width: 38%;
+        }
+
+        .value-col {
+            color: #334155;
+            width: 62%;
+        }
+
+        .value-col a {
+            color: #2b6cb0;
+            word-break: break-all;
+            transition: color 0.2s;
+        }
+
+        .value-col a:hover {
+            color: #1a365d;
+            text-decoration: underline;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #1a365d;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px 15px;
+            margin-top: 60px;
+            font-size: 0.85rem;
+        }
+
+        /* --- RESPONSIVE ADJUSTMENTS --- */
+        @media (max-width: 650px) {
+            .profile-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .photo-wrapper {
+                flex: none;
+            }
+
+            .profile-card {
+                padding: 25px 20px;
+            }
+
+            .card-title {
+                font-size: 1.3rem;
+            }
+
+            .label-col {
+                width: 42%;
+            }
+
+            .nav-link {
+                padding: 10px 14px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER BANNER -->
+    <header>
+        <img src="https://github.com/rayenibrahimovic27-bit/kati-/blob/main/showroom.jpg?raw=true" alt="Banner Showroom Mobil BROT" class="banner-img">
+        <h1 class="brand-title">SHOWROOM MOBIL BROT</h1>
+    </header>
+
+    <!-- NAVIGATION BAR -->
+    <nav>
+        <div class="nav-container">
+            <a href="index terbaru.html" class="nav-link">Katalog Produk</a>
+            <a href="detail terbaru.html" class="nav-link">Detail Unggulan</a>
+            <a href="transaksi terbaru.html" class="nav-link">Pemesanan</a>
+            <a href="invoice terbaru.html" class="nav-link active">Invoice</a>
+			<a href="tentang terbaru.html" class="nav-link">Tentang Kami</a>
+            <a href="kontak terbaru.html" class="nav-link active">Kontak Kami</a>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <section class="profile-card">
+            <h2 class="card-title">Biodata Pengembang Sistem (Mahasiswa)</h2>
+            <div class="title-divider"></div>
+
+            <div class="profile-container">
+                <div class="photo-wrapper">
+                    <img src="https://github.com/rayenibrahimovic27-bit/kati-/blob/main/rayen.jpg?raw=true" alt="Foto Rayen Ibrahimovic" class="student-photo">
+                </div>
+
+                <div class="details-wrapper">
+                    <table class="biodata-table">
+                        <tr>
+                            <td class="label-col">Nama Lengkap</td>
+                            <td class="value-col">: Rayen Ibrahimovic</td>
+                        </tr>
+                        <tr>
+                            <td class="label-col">NIM</td>
+                            <td class="value-col">: 10525008</td>
+                        </tr>
+                        <tr>
+                            <td class="label-col">Kelas</td>
+                            <td class="value-col">: IS-1</td>
+                        </tr>
+                        <tr>
+                            <td class="label-col">Mata Kuliah</td>
+                            <td class="value-col">: Komputer Aplikasi Teknologi Informasi</td>
+                        </tr>
+                        <tr>
+                            <td class="label-col">Dosen Pengampu</td>
+                            <td class="value-col">: Syahrul Mauluddin, S.Kom, M.Kom</td>
+                        </tr>
+                        <tr>
+                            <td class="label-col">Email Kampus</td>
+                            <td class="value-col">: <a href="mailto:rayen.10525008@mahasiswa.unikom.ac.id">rayen.10525008@mahasiswa.unikom.ac.id</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2025 Showroom Mobil BROT.</p>
+    </footer>
+
+</body>
+</html>
